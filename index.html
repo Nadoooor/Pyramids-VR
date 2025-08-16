@@ -2,34 +2,60 @@
      <head>
          <script src="https://aframe.io/releases/1.7.0/aframe.min.js"></script> 
          <script src="https://unpkg.com/aframe-environment-component@1.5.x/dist/aframe-environment-component.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/gh/MozillaReality/ammo.js@8bbc0ea/builds/ammo.wasm.js"></script>
+            <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-physics-system@v4.2.3/dist/aframe-physics-system.js"></script>
+
         </head>
          <body> 
-            <a-scene inspector="url: https://cdn.jsdelivr.net/gh/c-frame/aframe-editor@1.7.x/dist/aframe-editor.min.js">
+            <a-scene physics=" driver: ammo; debug: true; debugDrawMode: 1;" inspector="url: https://cdn.jsdelivr.net/gh/c-frame/aframe-editor@1.7.x/dist/aframe-editor.min.js">
+
            <a-assets>
             <a-asset-item id="SnakeHunter" src="here.glb"></a-asset-item>
+            <a-asset-item id="SnakePad" src="SnakePad.glb"></a-asset-item>
              <a-asset-item id="Table" src="Table.glb"></a-asset-item>
+             <img id="floor" src="2145.jpg"></img>
            
            </a-assets>
-                    <a-entity 
-    camera 
-    position="0.928 1.6 4.329"
+           <a-entity geometry="primitive: cylinder" ammo-body="type: kinematic" ammo-shape="type: box"     look-controls
+    wasd-controls="acceleration: 25; fly: true" 
+    position="0 1.6 0" rotation="0 0 0"
+    ><a-entity
+    camera
     rotation="-10 0 0"
-    look-controls
-    wasd-controls="acceleration: 25; fly: true"
     
-  ><a-cursor></a-cursor></a-entity>
+    
+  ><a-cursor></a-cursor>
+  </a-entity></a-entity>
+   
+<!-- Lighttttt -->
+           <a-light light="intensity: 6.54; type: spot; distance: 6.72; angle: 52.73; castShadow: true; decay: -0.46" position="-7.94881 5.38399 3.80081" rotation="-90 0 0"></a-light>
+           <a-light light="intensity: 6.54; type: spot; distance: 6.72; angle: 52.73; castShadow: true; decay: -0.46" position="12.58901 5.38399 3.80081" rotation="-90 0 0"></a-light>
+           <a-light light="intensity: 6.54; type: spot; distance: 6.72; angle: 52.73; castShadow: true; decay: -0.46" position="2.55578 5.38399 3.80081" rotation="-90 0 0"></a-light>
+           <a-light light="intensity: 6.54; type: spot; distance: 6.72; angle: 52.73; castShadow: true; decay: -0.46" position="7.768 5.38399 -2.43257" rotation="-90 0 0"></a-light>
+           <a-light light="intensity: 6.54; type: spot; distance: 6.72; angle: 52.73; castShadow: true; decay: -0.46" position="7.31409 5.38399 10.44975" rotation="-90 0 0"></a-light>
+           <a-light light="intensity: 6.54; type: spot; distance: 6.72; angle: 52.73; castShadow: true; decay: -0.46" position="-1.98557 5.38399 -2.43257" rotation="-90 0 0"></a-light>
+           <a-light light="intensity: 6.54; type: spot; distance: 6.72; angle: 52.73; castShadow: true; decay: -0.46" position="-2.69911 5.38399 10.44975" rotation="-90 0 0"></a-light>
+    <!-- skyy -->
            <a-sky color="#27D5D2"></a-sky>
-           <a-light position="1 1 1"></a-light>
-            <a-entity environment="preset: starry; groundColor: #7BC8A4; skyColor: #BCE3D9"></a-entity>
-            <a-box src="Dungeon_brick_wall_purple.png.png" scale="5 9 1"  position="1 1 1"></a-box>
-            <a-box src="Dungeon_brick_wall_purple.png.png" scale="5 9 0.5" position="6 1 1"></a-box>
-            <a-box src="Dungeon_brick_wall_purple.png.png" scale="5 9 1" position="11 1 1"></a-box>
-            <a-box src="Dungeon_brick_wall_purple.png.png" scale="5 9 1"  position="1 1 7"></a-box>
-            <a-box src="Dungeon_brick_wall_purple.png.png" scale="5 9 0.5" position="6 1 7"></a-box>
-            <a-box src="Dungeon_brick_wall_purple.png.png" scale="5 9 1" position="11 1 7"></a-box>
-            <a-box src="Dungeon_brick_wall_purple.png.png" scale="5 9 0.5" rotation="0 0 0" position="11 1 7"></a-box>
-           <a-entity gltf-model="#SnakeHunter" position="1 1.100 1.665" rotation="39.38 0 17.747" scale="5 5 5"></a-entity>
-           <a-entity gltf-model="#Table" position="1.2 0.055 1.611" rotation="0 0 0" scale="1 1 1"></a-entity>
+
+            <a-entity  environment="preset: starry; groundColor: #7BC8A4; skyColor: #BCE3D9"></a-entity>
+            <!-- walls -->
+            <a-box id="left" ammo-body="type: static" ammo-shape="type: box" class="box" src="Dungeon_brick_wall_purple.png.png" scale="22.72 9 0.458"  position="2.786 1 -3.318"></a-box>
+            <a-box id="Right" ammo-body="type: static" ammo-shape="type: box" class="box" src="Dungeon_brick_wall_purple.png.png" scale="22.72 9 0.458"  position="2.786 1 11.151"></a-box>
+            <a-box id="Back" ammo-body="type: static" ammo-shape="type: box" class="box" src="Dungeon_brick_wall_purple.png.png" scale="22.72 9 0.458" position="-8.6586 1 2.39067" rotation="0 -90.00422116371563 0"></a-box>
+            <a-box id="Front" ammo-body="type: static" ammo-shape="type: box" class="box" src="Dungeon_brick_wall_purple.png.png" scale="22.72 9 0.458" position="13.59703 1 2.39067" rotation="0 -90.00422116371563 0"></a-box>
+            <a-plane ammo-body="type: static" ammo-shape="type: box" class="box" src="#floor" rotation="-90 0 0" scale="22.10 14.62 0.94" position="2.498 0.029 3.952"></a-plane>
+            <a-box id="sealing" ammo-body="type: static" ammo-shape="type: box" class="box" src="Dungeon_brick_wall_purple.png.png" scale="24.70877 17.12334 0.5" rotation="-90.0504 0 0" position="2.52261 5.39618 4.28827"></a-box>
+            <!-- Projects -->
+           <a-entity ammo-body="type: dynamic; mass:1" ammo-shape="type: hull; offset: 0.25 0.27 -0.17 " gltf-model="#SnakeHunter" position="1 1.100 1.665" rotation="0 0 0" scale="5 5 5"></a-entity>
+           <a-entity ammo-body="type: dynamic; mass:1" ammo-shape="type: hull" gltf-model="#SnakePad" position="1 1.100 1.665" rotation="0 0 0" scale="5 5 5"></a-entity>
+           <!-- Tables -->
+           <a-entity ammo-body="type: static" ammo-shape="type: box" class="box" gltf-model="Table.glb" position="-1.98345 0.01824 -1.72164"></a-entity>
+           <a-entity ammo-body="type: static" ammo-shape="type: box" class="box" gltf-model="Table.glb" position="-7.14144 0.0333 3.75994"></a-entity>
+           <a-entity ammo-body="type: static" ammo-shape="type: box" class="box" gltf-model="Table.glb" position="-2.82055 0.0333 9.50026"></a-entity>
+           <a-entity ammo-body="type: static" ammo-shape="type: box" class="box" gltf-model="Table.glb" position="7.42709 0.0333 9.50026"></a-entity>
+           <a-entity ammo-body="type: static" ammo-shape="type: box" class="box" gltf-model="Table.glb" position="7.83334 0.01824 -1.72164"></a-entity>
+           <!-- Text -->
         </a-scene>
 
 
