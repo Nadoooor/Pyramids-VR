@@ -5,11 +5,11 @@
             <script src="https://cdn.jsdelivr.net/gh/MozillaReality/ammo.js@8bbc0ea/builds/ammo.wasm.js"></script>
             <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-physics-system@v4.2.3/dist/aframe-physics-system.js"></script>
             <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-extras@7.6.0/dist/aframe-extras.min.js"></script>
-            <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-editor@1.7.x/dist/aframe-editor.min.js"></script> 
+            <!-- <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-editor@1.7.x/dist/aframe-editor.min.js"></script>  -->
 
         </head>
          <body> 
-            <a-scene physics=" driver: ammo; debug: true; debugDrawMode: 1;" inspector="url: https://cdn.jsdelivr.net/gh/c-frame/aframe-editor@1.7.x/dist/aframe-editor.min.js">
+            <a-scene physics=" driver: ammo; debug: false; debugDrawMode: 1;">
 
            <a-assets>
             <a-asset-item id="SnakeHunter" src="here.glb"></a-asset-item>
@@ -25,40 +25,6 @@
           <a-cylinder ammo-body="type: kinematic; gravity: undefined undefined" ammo-shape="type: box; halfExtents: 1 0.5 1; sphereRadius: NaN" look-controls wasd-controls="acceleration: 25; fly: true" position="9.766448052789853 1.6 3.799176815660041" rotation="-7.792226013779201 -88.8084582452777 0" scale="1 0.1 1"><a-entity scale="1 10 1" camera><a-cursor sound="src: music.mp3; autoplay: true; loop: true" cursor="fuse: true; fuseTimeout: 800" raycaster="objects: .draggable"></a-cursor>
     </a-entity></a-cylinder>
    
-        <script>
-      AFRAME.registerComponent('gaze-drag', {
-        init: function () {
-          this.dragging = false;
-          this.el.addEventListener('mouseenter', () => {
-            this.dragging = true;
-          });
-          this.el.addEventListener('mouseleave', () => {
-            this.dragging = false;
-          });
-        },
-        tick: function () {
-          if (this.dragging) return;
-          // Get camera (the one holding the cursor)
-          const cam = document.querySelector('[camera]').object3D;
-          const dir = new THREE.Vector3();
-          cam.getWorldDirection(dir);
-
-          // Position the object some distance in front of camera
-          const camPos = new THREE.Vector3();
-          cam.getWorldPosition(camPos);
-
-          const distance = 2; // how far in front of gaze
-          const newPos = camPos.clone().add(dir.multiplyScalar(distance));
-
-          this.el.object3D.position.copy(newPos);
-        }
-      });
-
-      // Apply gaze-drag to draggable objects
-      document.querySelectorAll('.draggable').forEach(el => {
-        el.setAttribute('gaze-drag', '');
-      });
-    </script>
 <!-- Lighttttt -->
            <a-light light="intensity: 6.54; type: spot; distance: 6.72; angle: 52.73; castShadow: true; decay: -0.46" position="-7.94881 5.38399 3.80081" rotation="-90 0 0"></a-light>
            <a-light light="intensity: 6.54; type: spot; distance: 6.72; angle: 52.73; castShadow: true; decay: -0.46" position="12.58901 5.38399 3.80081" rotation="-90 0 0"></a-light>
@@ -79,9 +45,9 @@
             <a-plane ammo-body="type: static" ammo-shape="type: box" class="box" src="#floor" rotation="-90 0 0" scale="22.10 14.62 0.94" position="2.498 0.029 3.952"></a-plane>
             <a-box id="sealing" ammo-body="type: static" ammo-shape="type: box" class="box" src="Dungeon_brick_wall_purple.png.png" scale="24.70877 17.12334 0.5" rotation="-90.0504 0 0" position="2.52261 5.39618 4.28827"></a-box>
             <!-- Projects -->
-                 <a-entity gaze-drag ammo-body="gravity: undefined undefined" ammo-shape="sphereRadius: NaN" gltf-model="here.glb" position="-2.84872 1.58091 9.22675" rotation="0.7786496435827888 75.07122214922099 2.918074050601283" scale="0.01 0.01 0.01"></a-entity>
-           <a-entity gaze-drag ammo-body="gravity: undefined undefined" ammo-shape="sphereRadius: NaN" gltf-model="SnakePad.glb" position="-1.93 1.35393 -1.61765" rotation="88.48359117543842 179.99870204491404 179.99870204491404" scale="0.01 0.01 0.01"></a-entity>
-           <a-entity gaze-drag ammo-body="type: dynamic; mass:1" ammo-shape="type: hull; offset: 0.1 0.15d 0" gltf-model="#SnakeBoard" position="7.735 1.232 -1.857" rotation="90 180 180" scale="0.004 0.004 0.004" animation-mixer></a-entity>
+                 <a-entity  ammo-body="gravity: undefined undefined" ammo-shape="sphereRadius: NaN" gltf-model="here.glb" position="-2.84872 1.58091 9.22675" rotation="0.7786496435827888 75.07122214922099 2.918074050601283" scale="0.01 0.01 0.01"></a-entity>
+           <a-entity  ammo-body="gravity: undefined undefined" ammo-shape="sphereRadius: NaN" gltf-model="SnakePad.glb" position="-1.93 1.35393 -1.61765" rotation="88.48359117543842 179.99870204491404 179.99870204491404" scale="0.01 0.01 0.01"></a-entity>
+           <a-entity  ammo-body="type: dynamic; mass:1" ammo-shape="type: hull; offset: 0.1 0.15d 0" gltf-model="#SnakeBoard" position="7.735 1.232 -1.857" rotation="90 180 180" scale="0.004 0.004 0.004" animation-mixer></a-entity>
            <!-- Tables -->
             <a-entity ammo-body="type: kinematic; mass:1" ammo-shape="type: box; offset: 0 1.5 0" gltf-model="#hi" position="12.039 0.035 3.714" rotation="0 90 0" scale="1 1 1" animation-mixer></a-entity>
            <a-entity ammo-body="type: static" ammo-shape="type: box; offset: 0 0.55 0" class="box" gltf-model="Table.glb" position="-1.98345 0.01824 -1.72164"></a-entity>
