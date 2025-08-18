@@ -6,7 +6,7 @@
             <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-physics-system@v4.2.3/dist/aframe-physics-system.js"></script>
             <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-extras@7.6.0/dist/aframe-extras.min.js"></script>
             <!-- <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-editor@1.7.x/dist/aframe-editor.min.js"></script>  -->
-
+             <script src="grap.js"></script>
         </head>
          <body> 
             <a-scene physics=" driver: ammo; debug: false; debugDrawMode: 1;">
@@ -19,11 +19,21 @@
             <a-asset-item id="hi" src="hi.glb"></a-asset-item>
 
              <img id="floor" src="2145.jpg"></img>
+
              
            
            </a-assets>
-          <a-cylinder ammo-body="type: kinematic; gravity: undefined undefined" ammo-shape="type: box; halfExtents: 1 0.5 1; sphereRadius: NaN" look-controls wasd-controls="acceleration: 25; fly: true" position="9.766448052789853 1.6 3.799176815660041" rotation="-7.792226013779201 -88.8084582452777 0" scale="1 0.1 1"><a-entity scale="1 10 1" camera><a-cursor sound="src: music.mp3; autoplay: true; loop: true" cursor="fuse: true; fuseTimeout: 800" raycaster="objects: .draggable"></a-cursor>
-    </a-entity></a-cylinder>
+          
+            <a-entity scale="1 1 1" look-controls wasd-controls="acceleration: 25" id="camera" rotation="-7.792226013779201 -88.8084582452777 0" position="9.766448052789853 1.6 3.799176815660041"  camera>
+              <a-entity sound="src: music.mp3; autoplay: true; loop: true" cursor="fuse: false"  raycaster="objects: .draggable" geometry="primitive: circle; radius: 0.005" position="0 0 -1">
+            <a-animation
+            attribute="scale"
+            to="3 3 3"
+            begin="cursor-fusing"
+            fill="backwards"
+            ></a-animation>
+          </a-entity>
+    </a-entity>
    
 <!-- Lighttttt -->
            <a-light light="intensity: 6.54; type: spot; distance: 6.72; angle: 52.73; castShadow: true; decay: -0.46" position="-7.94881 5.38399 3.80081" rotation="-90 0 0"></a-light>
@@ -38,16 +48,16 @@
 
             <a-entity  environment="preset: starry; groundColor: #7BC8A4; skyColor: #BCE3D9"></a-entity>
             <!-- walls -->
-            <a-box id="left" ammo-body="type: static" ammo-shape="type: box" class="box" src="Dungeon_brick_wall_purple.png.png" scale="22.72 9 0.458"  position="2.786 1 -3.318"></a-box>
+            <a-box  id="left" ammo-body="type: static" ammo-shape="type: box" class="box" src="Dungeon_brick_wall_purple.png.png" scale="22.72 9 0.458"  position="2.786 1 -3.318"></a-box>
             <a-box id="Right" ammo-body="type: static" ammo-shape="type: box" class="box" src="Dungeon_brick_wall_purple.png.png" scale="22.72 9 0.458"  position="2.786 1 11.151"></a-box>
-            <a-box id="Back" ammo-body="type: static" ammo-shape="type: box" class="box" src="Dungeon_brick_wall_purple.png.png" scale="22.72 9 0.458" position="-8.6586 1 2.39067" rotation="0 -90.00422116371563 0"></a-box>
+            <a-box id="Back"  class="box" src="Dungeon_brick_wall_purple.png.png" scale="22.72 9 0.458" position="-8.6586 1 2.39067" rotation="0 -90.00422116371563 0"></a-box>
             <a-box id="Front" ammo-body="type: static" ammo-shape="type: box" class="box" src="Dungeon_brick_wall_purple.png.png" scale="22.72 9 0.458" position="13.59703 1 2.39067" rotation="0 -90.00422116371563 0"></a-box>
-            <a-plane ammo-body="type: static" ammo-shape="type: box" class="box" src="#floor" rotation="-90 0 0" scale="22.10 14.62 0.94" position="2.498 0.029 3.952"></a-plane>
+            <a-box ammo-body="type: static" ammo-shape="type: box" class="box" src="#floor" rotation="-90 0 0" scale="22.10 14.62 0.5" position="2.498 -0.24 3.952"></a-box>
             <a-box id="sealing" ammo-body="type: static" ammo-shape="type: box" class="box" src="Dungeon_brick_wall_purple.png.png" scale="24.70877 17.12334 0.5" rotation="-90.0504 0 0" position="2.52261 5.39618 4.28827"></a-box>
             <!-- Projects -->
-                 <a-entity  ammo-body="gravity: undefined undefined" ammo-shape="sphereRadius: NaN" gltf-model="here.glb" position="-2.84872 1.58091 9.22675" rotation="0.7786496435827888 75.07122214922099 2.918074050601283" scale="0.01 0.01 0.01"></a-entity>
-           <a-entity  ammo-body="gravity: undefined undefined" ammo-shape="sphereRadius: NaN" gltf-model="SnakePad.glb" position="-1.93 1.35393 -1.61765" rotation="88.48359117543842 179.99870204491404 179.99870204491404" scale="0.01 0.01 0.01"></a-entity>
-           <a-entity  ammo-body="type: dynamic; mass:1" ammo-shape="type: hull; offset: 0.1 0.15d 0" gltf-model="#SnakeBoard" position="7.735 1.232 -1.857" rotation="90 180 180" scale="0.004 0.004 0.004" animation-mixer></a-entity>
+                 <a-entity class="draggable"  ammo-body ammo-shape="sphereRadius: NaN" gaze-drag gltf-model="here.glb" position="-2.84872 1.58091 9.22675" rotation="0.7786496435827888 75.07122214922099 2.918074050601283" scale="0.01 0.01 0.01"></a-entity>
+           <a-entity class="draggable"  ammo-body ammo-shape="sphereRadius: NaN" gaze-drag gltf-model="SnakePad.glb" position="-1.93 1.35393 -1.61765" rotation="88.48359117543842 179.99870204491404 179.99870204491404" scale="0.01 0.01 0.01"></a-entity>
+           <a-entity class="draggable"  ammo-body ammo-shape="type: hull; offset: 0.1 0.15d 0" gaze-drag gltf-model="#SnakeBoard" position="7.735 1.232 -1.857" rotation="90 180 180" scale="0.004 0.004 0.004" animation-mixer></a-entity>
            <!-- Tables -->
             <a-entity ammo-body="type: kinematic; mass:1" ammo-shape="type: box; offset: 0 1.5 0" gltf-model="#hi" position="12.039 0.035 3.714" rotation="0 90 0" scale="1 1 1" animation-mixer></a-entity>
            <a-entity ammo-body="type: static" ammo-shape="type: box; offset: 0 0.55 0" class="box" gltf-model="Table.glb" position="-1.98345 0.01824 -1.72164"></a-entity>
