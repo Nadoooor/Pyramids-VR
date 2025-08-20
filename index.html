@@ -9,13 +9,19 @@
              <script src="grap.js"></script>
         </head>
          <body> 
-            <a-scene physics=" driver: ammo; debug: false; debugDrawMode: 1;">
+            <a-scene obb-collider="showColliders: false" physics=" driver: ammo; debug: truew; debugDrawMode: 1;">
 
            <a-assets>
             <a-asset-item id="SnakeHunter" src="here.glb"></a-asset-item>
             <a-asset-item id="SnakePad" src="SnakePad.glb"></a-asset-item>
              <a-asset-item id="Table" src="Table.glb"></a-asset-item>
              <a-asset-item id="SnakeBoard" src="SnakeBoard.glb"></a-asset-item>
+             <a-asset-item id="dancer" src="hip_hop_dancing_patrick.glb"></a-asset-item>
+             <a-asset-item id="current" src="current.glb"></a-asset-item>
+             <img id="padpng" src="Padpng.png"></img>
+             <img id="boardpng" src="Boardpng.png"></img>
+             <img id="hunterpng" src="Hunterpng.png"></img>
+             <img id="currentpng" src="Currentpng.png"></img>
             <a-asset-item id="hi" src="hi.glb"></a-asset-item>
 
              <img id="floor" src="2145.jpg"></img>
@@ -55,17 +61,33 @@
             <a-box ammo-body="type: static" ammo-shape="type: box" class="box" src="#floor" rotation="-90 0 0" scale="22.10 14.62 0.5" position="2.498 -0.24 3.952"></a-box>
             <a-box id="sealing" ammo-body="type: static" ammo-shape="type: box" class="box" src="Dungeon_brick_wall_purple.png.png" scale="24.70877 17.12334 0.5" rotation="-90.0504 0 0" position="2.52261 5.39618 4.28827"></a-box>
             <!-- Projects -->
-                 <a-entity class="draggable"  ammo-body ammo-shape="sphereRadius: NaN" gaze-drag gltf-model="here.glb" position="-2.84872 1.58091 9.22675" rotation="0.7786496435827888 75.07122214922099 2.918074050601283" scale="0.01 0.01 0.01"></a-entity>
-           <a-entity class="draggable"  ammo-body ammo-shape="sphereRadius: NaN" gaze-drag gltf-model="SnakePad.glb" position="-1.93 1.35393 -1.61765" rotation="88.48359117543842 179.99870204491404 179.99870204491404" scale="0.01 0.01 0.01"></a-entity>
-           <a-entity class="draggable"  ammo-body ammo-shape="type: hull; offset: 0.1 0.15d 0" gaze-drag gltf-model="#SnakeBoard" position="7.735 1.232 -1.857" rotation="90 180 180" scale="0.004 0.004 0.004" animation-mixer></a-entity>
+                 <a-entity obb-collider class="draggable" id="SnakeHunter1"  ammo-body ammo-shape="sphereRadius: NaN" gaze-drag gltf-model="#SnakeHunter" position="-2.84872 1.58091 9.22675" rotation="0.7786496435827888 75.07122214922099 2.918074050601283" scale="0.01 0.01 0.01"></a-entity>
+           <a-entity obb-collider class="draggable" id="SnakePad1"  ammo-body ammo-shape="sphereRadius: NaN" gaze-drag gltf-model="#SnakePad" position="-1.93 1.35393 -1.61765" rotation="88.48359117543842 179.99870204491404 179.99870204491404" scale="0.01 0.01 0.01"></a-entity>
+           <a-entity obb-collider class="draggable" id="SnakeBoard1" ammo-body ammo-shape="type: hull; offset: 0.1 0.15 0; linearDamping: 0.9; angularDamping: 0.9" gaze-drag gltf-model="#SnakeBoard" position="7.735 1.232 -1.857" rotation="90 180 180" scale="0.004 0.004 0.004" animation-mixer></a-entity>
+           <a-entity obb-collider="centerModel: true" class="draggable" id="current1" ammo-body="gravity: undefined undefined" ammo-shape="sphereRadius: NaN" gaze-drag="" gltf-model="current.glb" position="7.44931 1.34845 9.60948" rotation="77.3636262875394 0 172.03458869259558" scale="0.009 0.009 0.009" animation-mixer=""></a-entity>
            <!-- Tables -->
-            <a-entity ammo-body="type: kinematic; mass:1" ammo-shape="type: box; offset: 0 1.5 0" gltf-model="#hi" position="12.039 0.035 3.714" rotation="0 90 0" scale="1 1 1" animation-mixer></a-entity>
+           <a-box trig obb-collider="" visible="false" position="-7.04233 1.59954 3.72212"></a-box>
            <a-entity ammo-body="type: static" ammo-shape="type: box; offset: 0 0.55 0" class="box" gltf-model="Table.glb" position="-1.98345 0.01824 -1.72164"></a-entity>
            <a-entity ammo-body="type: static" ammo-shape="type: box; offset: 0 0.55 0" class="box" gltf-model="Table.glb" position="-7.14144 0.0333 3.75994"></a-entity>
            <a-entity ammo-body="type: static" ammo-shape="type: box; offset: 0 0.55 0" class="box" gltf-model="Table.glb" position="-2.82055 0.0333 9.50026"></a-entity>
            <a-entity ammo-body="type: static" ammo-shape="type: box; offset: 0 0.55 0" class="box" gltf-model="Table.glb" position="7.42709 0.0333 9.50026"></a-entity>
            <a-entity ammo-body="type: static" ammo-shape="type: box; offset: 0 0.55 0" class="box" gltf-model="Table.glb" position="7.83334 0.01824 -1.72164"></a-entity>
            <!-- Text -->
+          <a-text id="instruction" value="Put Any Project Here" height="100" width="400" position="-8.35676 3.16036 5.30021" rotation="0 90 0" scale="0.02 0.02 0.02"></a-text>
+          <a-text id="boardtxt" value="SnakeBoard" height="100" width="400" position="-8.35676 1.822 4.757" rotation="0 90 0" scale="0.02 0.02 0.02"></a-text>
+          <a-text id="padtxt" value="SnakePad" height="100" width="400" position="-8.35676 1.822 4.757" rotation="0 90 0" scale="0.02 0.02 0.02"></a-text>
+          <a-text id="huntertxt" value="SnakeHunter" height="100" width="400" position="-8.35676 1.822 4.757" rotation="0 90 0" scale="0.02 0.02 0.02"></a-text>
+          <a-text id="currenttxt" value="Current-Hacker" height="100" width="400" position="-8.35676 1.822 4.757" rotation="0 90 0" scale="0.02 0.02 0.02"></a-text>
+            <!-- animation -->
+          <a-entity id="patr" animation-mixer gltf-model="hip_hop_dancing_patrick.glb"  position="-7.13147 0 1.95442" rotation="0 90 0"></a-entity>          
+          <a-entity ammo-body="type: kinematic; mass:1" ammo-shape="type: box; offset: 0 1.5 0" gltf-model="#hi" position="12.039 0.035 3.714" rotation="0 90 0" scale="1 1 1" animation-mixer></a-entity>
+          <a-entity id="patr2" animation-mixer gltf-model="hip_hop_dancing_patrick.glb"  position="-7.13147 0 5.55036" rotation="0 90 0"></a-entity>
+             <!-- images -->
+          <a-plane id="boardimg" src="#boardpng" height="100" width="150" position="-8.35676 3.16036 3.75628" rotation="0 90 0" scale="0.02 0.02 0.02"></a-plane>
+          <a-plane id="padimg" src="#padpng" height="100" width="150" position="-8.35676 3.16036 3.75628" rotation="0 90 0" scale="0.02 0.02 0.02"></a-plane>
+          <a-plane id="hunterimg" src="#hunterpng" height="100" width="150" position="-8.35676 3.16036 3.75628" rotation="0 90 0" scale="0.02 0.025 0.02"></a-plane>
+          <a-plane id="currentimg" src="#currentpng" height="100" width="150" position="-8.35676 3.16036 3.75628" rotation="0 90 0" scale="0.02 0.025 0.02"></a-plane>
+
         </a-scene>
 
 
